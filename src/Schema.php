@@ -165,7 +165,7 @@ class Schema extends JsonSchema implements MetaHolder, SchemaContract, HasDefaul
         $options->import = true;
 
         if ($options->refResolver === null) {
-            $options->refResolver = new RefResolver($data);
+            $options->refResolver = new RefResolver($data, $options->maxNestLevel ?? 200);
         } else {
             $options->refResolver->setRootData($data);
         }
