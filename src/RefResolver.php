@@ -13,7 +13,7 @@ class RefResolver
     public $url;
     /** @var null|RefResolver */
     private $rootResolver;
-    private static int $MAX_DEEP_NESTING = 500; //Change this if you receive DEEP_NESTING exceptions
+    private int $max_deep_nesting = 200; //Change this via options submitted to ::import if needed
 
     /**
      * @param mixed $resolutionScope
@@ -103,9 +103,10 @@ class RefResolver
      * RefResolver constructor.
      * @param JsonSchema $rootData
      */
-    public function __construct($rootData = null)
+    public function __construct($rootData = null, int $max_nest_level = 200)
     {
         $this->rootData = $rootData;
+        $this->max_deep_nesting = $max_nest_level;
     }
 
     public function setRootData($rootData)
@@ -225,8 +226,8 @@ class RefResolver
      */
     public function preProcessReferences($data, Context $options, $nestingLevel = 0)
     {
-        if ($nestingLevel > self::$MAX_DEEP_NESTING) { //Updated due to specific recursion depth from Amazon product JSON Schemas - yep 200 was not enough
-            throw new Exception('Too deep nesting level', Exception::DEEP_NESTING);
+        if ($nestingLevel > $this->max_deep_nesting) { //Updated due to specific recursion depth from Amazon product JSON Schemas - yep 200 was not enough
+            throw new Exception('Too deep nesting level. Suggest submitting maxNestLevel via options', Exception::DEEP_NESTING);
         }
         if (is_array($data)) {
             foreach ($data as $key => $item) {
