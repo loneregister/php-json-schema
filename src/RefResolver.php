@@ -13,6 +13,7 @@ class RefResolver
     public $url;
     /** @var null|RefResolver */
     private $rootResolver;
+    private static int $MAX_DEEP_NESTING = 500; //Change this if you receive DEEP_NESTING exceptions
 
     /**
      * @param mixed $resolutionScope
@@ -224,7 +225,7 @@ class RefResolver
      */
     public function preProcessReferences($data, Context $options, $nestingLevel = 0)
     {
-        if ($nestingLevel > 200) {
+        if ($nestingLevel > self::$MAX_DEEP_NESTING) { //Updated due to specific recursion depth from Amazon product JSON Schemas - yep 200 was not enough
             throw new Exception('Too deep nesting level', Exception::DEEP_NESTING);
         }
         if (is_array($data)) {
