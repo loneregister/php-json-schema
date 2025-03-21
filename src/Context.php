@@ -51,6 +51,9 @@ class Context extends MagicMap
 
     public $isRef = false;
 
+    /** @var int property max recursive nesting depth */
+    public $maxNestLevel = 200;
+
     /**
      * Dereference $ref unless there is a $ref property defined with format not equal to `uri-reference`.
      * Default JSON Schema behavior is to dereference only if there is a $ref property defined with format
