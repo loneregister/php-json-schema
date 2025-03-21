@@ -37,6 +37,8 @@ class Schema extends JsonSchema implements MetaHolder, SchemaContract, HasDefaul
     const CONST_PROPERTY = 'const';
     const DEFAULT_PROPERTY = 'default';
 
+    const DEFAULT_MAX_NEST = 200;
+
     const DEFAULT_MAPPING = 'default';
 
     const VERSION_AUTO = 'a';
@@ -165,7 +167,7 @@ class Schema extends JsonSchema implements MetaHolder, SchemaContract, HasDefaul
         $options->import = true;
 
         if ($options->refResolver === null) {
-            $options->refResolver = new RefResolver($data, $options->maxNestLevel ?? 200);
+            $options->refResolver = new RefResolver($data, $options->maxNestLevel ?? DEFAULT_MAX_NEST);
         } else {
             $options->refResolver->setRootData($data);
         }
