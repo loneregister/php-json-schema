@@ -226,8 +226,8 @@ class RefResolver
      */
     public function preProcessReferences($data, Context $options, $nestingLevel = 0)
     {
-        if ($nestingLevel > $this->max_deep_nesting) { //Updated due to specific recursion depth from Amazon product JSON Schemas - yep 200 was not enough
-            throw new Exception('Too deep nesting level. Suggest submitting maxNestLevel via options', Exception::DEEP_NESTING);
+        if ($nestingLevel > $this->maxNestLevel) { //Updated due to specific recursion depth from Amazon product JSON Schemas - yep 200 was not enough
+            throw new Exception('Too deep nesting level. Nesting / Recursion level (' . $nestingLevel . ') exceeds ' . $this->maxNestLevel , Exception::DEEP_NESTING);
         }
         if (is_array($data)) {
             foreach ($data as $key => $item) {
