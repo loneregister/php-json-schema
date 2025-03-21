@@ -308,7 +308,7 @@ User::export($user); // Exception: Required property missing: id at #->propertie
 
 #### Nested structures
 
-Nested structures allow you to make composition: flatten several objects in one and separate back.
+Nested structures allow you to make composition: flatten several objects in one and separate back.  For nested structures that exceed a depth of the default 200 recursion limit, submit a Context maxNestLevel of an appropriate amount.
 
 ```php
 $user = new User();
@@ -462,7 +462,8 @@ $this->assertSame(4, $res->one);
 #### Overriding mapping classes
 
 If you want to map data to a different class you can register mapping at top level of your importer structure.
-
+Additionally, you can use the option property, maxNestLevel to increase your depth beyond the default 200 which may be
+useful for certain complex Schema's.
 ```php
 class CustomSwaggerSchema extends SwaggerSchema
 {
@@ -470,6 +471,7 @@ class CustomSwaggerSchema extends SwaggerSchema
     {
         if ($options === null) {
             $options = new Context();
+            $options->maxNestLevel = 500;
         }
         $options->objectItemClassMapping[Schema::className()] = CustomSchema::className();
         return parent::import($data, $options);
