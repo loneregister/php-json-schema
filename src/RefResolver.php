@@ -13,7 +13,7 @@ class RefResolver
     public $url;
     /** @var null|RefResolver */
     private $rootResolver;
-    private int $max_deep_nesting = 200; //Change this via options submitted to ::import if needed
+    private int $maxNestLevel = 200; //Change this via options submitted to ::import if needed
 
     /**
      * @param mixed $resolutionScope
@@ -103,10 +103,10 @@ class RefResolver
      * RefResolver constructor.
      * @param JsonSchema $rootData
      */
-    public function __construct($rootData = null, int $max_nest_level = 200)
+    public function __construct($rootData = null, int $maxNestLevel = 200)
     {
         $this->rootData = $rootData;
-        $this->max_deep_nesting = $max_nest_level;
+        $this->maxNestLevel = $max_nest_level;
     }
 
     public function setRootData($rootData)
