@@ -54,7 +54,7 @@ class Context extends MagicMap
     public $isRef = false;
 
     /** @var int property max recursive nesting depth */
-    public $maxNestLevel = DEFAULT_MAX_NEST;
+    public $maxNestLevel = self::DEFAULT_MAX_NEST;
 
     /**
      * Dereference $ref unless there is a $ref property defined with format not equal to `uri-reference`.
