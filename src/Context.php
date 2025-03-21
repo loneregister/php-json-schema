@@ -4,6 +4,8 @@ namespace Swaggest\JsonSchema;
 
 class Context extends MagicMap
 {
+    const DEFAULT_MAX_NEST = 200;
+    
     public $import = true;
 
     /** @var DataPreProcessor */
@@ -52,7 +54,7 @@ class Context extends MagicMap
     public $isRef = false;
 
     /** @var int property max recursive nesting depth */
-    public $maxNestLevel = 200;
+    public $maxNestLevel = DEFAULT_MAX_NEST;
 
     /**
      * Dereference $ref unless there is a $ref property defined with format not equal to `uri-reference`.
