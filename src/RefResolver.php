@@ -106,7 +106,7 @@ class RefResolver
     public function __construct($rootData = null, int $maxNestLevel = 200)
     {
         $this->rootData = $rootData;
-        $this->maxNestLevel = $max_nest_level;
+        $this->maxNestLevel = $maxNestLevel;
     }
 
     public function setRootData($rootData)
